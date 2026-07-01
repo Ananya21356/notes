@@ -1,0 +1,24 @@
+services:
+  # Backend API
+  - type: web
+    name: notes-api
+    env: node
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: PORT
+        value: 5001
+      - key: MONGO_URI
+        sync: false
+      - key: NODE_ENV
+        value: production
+
+  # Frontend
+  - type: web
+    name: notes-client
+    env: node
+    buildCommand: cd client && npm install && npm run build
+    startCommand: cd client && npm run preview
+    envVars:
+      - key: VITE_API_URL
+        sync: false
